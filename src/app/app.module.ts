@@ -8,6 +8,9 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { AuthModule } from '../auth/auth.module';
 import { UsersModule } from '../users/users.module';
 import { FixtureModule } from '../fixture/fixture.module';
+import { TournamentModule } from '../tournament/tournament.module';
+import { APP_FILTER } from '@nestjs/core';
+import { AllExceptionsFilter } from '../exceptions/exceptions.filter';
 
 @Module({
   imports: [
@@ -23,8 +26,15 @@ import { FixtureModule } from '../fixture/fixture.module';
     AuthModule,
     UsersModule,
     FixtureModule,
+    TournamentModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
+  ],
 })
 export class AppModule {}

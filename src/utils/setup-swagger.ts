@@ -10,11 +10,11 @@ export function setupSwagger(app: INestApplication): void {
   const config = app.get(ConfigService);
 
   const document = SwaggerModule.createDocument(app, documentBuilder.build());
-  SwaggerModule.setup('doc', app, document, {
+  SwaggerModule.setup('docs', app, document, {
     swaggerOptions: {
       persistAuthorization: true,
     },
   });
 
-  console.info(`Documentation: http://localhost:${config.get('PORT')}/doc`);
+  console.info(`Documentation: http://localhost:${config.get('PORT')}/docs`);
 }

@@ -9,6 +9,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { errorCodes } from './fixture.error-code';
+import { Public } from '../auth/auth.decorator';
 
 @ApiTags('Fixtures')
 @ApiBearerAuth()
@@ -16,6 +17,7 @@ import { errorCodes } from './fixture.error-code';
 export class FixtureController {
   constructor(private service: FixtureService) {}
 
+  @Public()
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({ type: GetFixturesResponse })
   @ApiBadRequestResponse({
@@ -24,7 +26,7 @@ export class FixtureController {
   })
   @ApiInternalServerErrorResponse()
   @Get()
-  public async getFixtures(@Query() getFixturesQuery: GetFixturesQuery) {
+  async getFixtures(@Query() getFixturesQuery: GetFixturesQuery) {
     return this.service.getFixtures(getFixturesQuery);
   }
 }
