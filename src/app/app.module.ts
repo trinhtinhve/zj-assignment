@@ -7,6 +7,7 @@ import { configValidationSchema } from '../utils/config-validation-schema';
 import { PrismaModule } from '../prisma/prisma.module';
 import { AuthModule } from '../auth/auth.module';
 import { UsersModule } from '../users/users.module';
+import { FixtureModule } from '../fixture/fixture.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { UsersModule } from '../users/users.module';
     PrismaModule,
     AuthModule,
     UsersModule,
+    FixtureModule,
   ],
   controllers: [AppController],
   providers: [AppService],

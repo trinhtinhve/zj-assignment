@@ -8,12 +8,70 @@ datasource db {
 }
 
 model User {
-  id              Int        @id @default(autoincrement())
-  username        String     @unique
-  password        String
-  fullname        String
-  email           String    @unique
-  phoneNumber     String     @unique
+  id          Int      @id @default(autoincrement())
+  username    String   @unique
+  password    String
+  fullname    String
+  email       String   @unique
+  phoneNumber String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 
   @@map("users")
+}
+
+model Tournament {
+  id        Int      @id @default(autoincrement())
+  name      String
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  fixtures Fixture[]
+
+  @@map("tournaments")
+}
+
+model Fixture {
+  id           Int        @id @default(autoincrement())
+  tournamentId Int
+  tournament   Tournament @relation(fields: [tournamentId], references: [id])
+  matchDate    DateTime
+  matches      Match[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @default(now()) @updatedAt
+
+  @@map("fixtures")
+}
+
+model Match {
+  id         Int     @id @default(autoincrement())
+  fixtureId  Int
+  fixture    Fixture @relation(fields: [fixtureId], references: [id])
+  name       String
+  team1Id    Int
+  team1      Team    @relation("Team1Matches", fields: [team1Id], references: [id])
+  team2Id    Int
+  team2      Team    @relation("Team2Matches", fields: [team2Id], references: [id])
+  scoreTeam1 Int     @default(0)
+  scoreTeam2 Int     @default(0)
+  status     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("matches")
+}
+
+model Team {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  matchesAsTeam1 Match[] @relation("Team1Matches")
+  matchesAsTeam2 Match[] @relation("Team2Matches")
+
+  @@map("teams")
 }

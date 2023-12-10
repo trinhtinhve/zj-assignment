@@ -1,0 +1,64 @@
+-- AlterTable
+ALTER TABLE `users` ADD COLUMN `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    ADD COLUMN `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3);
+
+-- CreateTable
+CREATE TABLE `tournaments` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `startDate` DATETIME(3) NOT NULL,
+    `endDate` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `fixtures` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `tournamentId` INTEGER NOT NULL,
+    `matchDate` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `matches` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `fixtureId` INTEGER NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `team1Id` INTEGER NOT NULL,
+    `team2Id` INTEGER NOT NULL,
+    `scoreTeam1` INTEGER NOT NULL DEFAULT 0,
+    `scoreTeam2` INTEGER NOT NULL DEFAULT 0,
+    `status` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `teams` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `fixtures` ADD CONSTRAINT `fixtures_tournamentId_fkey` FOREIGN KEY (`tournamentId`) REFERENCES `tournaments`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `matches` ADD CONSTRAINT `matches_fixtureId_fkey` FOREIGN KEY (`fixtureId`) REFERENCES `fixtures`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `matches` ADD CONSTRAINT `matches_team1Id_fkey` FOREIGN KEY (`team1Id`) REFERENCES `teams`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `matches` ADD CONSTRAINT `matches_team2Id_fkey` FOREIGN KEY (`team2Id`) REFERENCES `teams`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
