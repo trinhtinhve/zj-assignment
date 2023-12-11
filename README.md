@@ -9,3 +9,7 @@ ZJ assignment is to design apis for Fixtures.
 - add seeds data: npx ts-node ./script/seeds.ts
 - start app: npm start
 - api docs: http://localhost:3000/docs
+
+# Test
+- UT: npm run test
+- e2e: npm run test:e2e

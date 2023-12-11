@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { GetTournamentResponse } from './tournament.model';
-import { BadRequestEx } from 'src/exceptions/http.exception';
+import { BadRequestEx } from '../exceptions/http.exception';
 import { errorCodes } from './tournament.error-code';
 
 @Injectable()
