@@ -2,7 +2,7 @@
 ZJ assignment is to design apis for Fixtures.
 
 # Setup
-- clone .env.example to .env
+- clone .env.example to .env: cp -a .env.example .env
 - install your own mysql db then update corressponding username and password in .env
 - install dependencies: npm install
 - run prisma migrate: npm run migrate:deploy or npm run migrate:dev
