@@ -20,3 +20,6 @@ npm run start:dev (in background with pm2)
 # Test
 - UT: npm run test
 - e2e: npm run test:e2e
+
+# deployment
+- access api docs on dev env: http://13.229.105.145:3000/docs
