@@ -17,6 +17,9 @@ npm install pm2 -g
 npm run start:dev (in background with pm2)
 - api docs: http://localhost:3000/docs
 
+# ERD
+https://drive.google.com/file/d/1Rri5CLH5plEB4XNlN0DS8ktBVHlfJbzz/view?usp=sharing
+
 # Test
 - UT: npm run test
 - e2e: npm run test:e2e

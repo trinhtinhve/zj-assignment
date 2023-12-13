@@ -42,15 +42,19 @@ async function run(): Promise<void> {
     data: [
       {
         name: 'Team 1',
+        logoUrl: 'url_team1_logo',
       },
       {
         name: 'Team 2',
+        logoUrl: 'url_team2_logo',
       },
       {
         name: 'Team 3',
+        logoUrl: 'url_team3_logo',
       },
       {
         name: 'Team 4',
+        logoUrl: 'url_team4_logo',
       },
     ],
   });

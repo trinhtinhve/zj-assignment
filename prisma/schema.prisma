@@ -67,6 +67,7 @@ model Match {
 model Team {
   id        Int      @id @default(autoincrement())
   name      String
+  logoUrl   String @default("")
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 

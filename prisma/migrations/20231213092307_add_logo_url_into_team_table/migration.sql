@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `teams` ADD COLUMN `logoUrl` VARCHAR(191) NOT NULL DEFAULT '';
